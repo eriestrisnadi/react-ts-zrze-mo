@@ -21,6 +21,7 @@ export interface SearchMoviePageProps {
 }
 export interface SearchMoviePageState {
   movies: PartialMovieModel[];
+  query: string;
 }
 
 export class SearchMoviePage extends Component<
@@ -28,7 +29,8 @@ export class SearchMoviePage extends Component<
   SearchMoviePageState
 > {
   state = {
-    movies: []
+    movies: [],
+    query: ""
   };
 
   unlisten: Function;
@@ -36,7 +38,8 @@ export class SearchMoviePage extends Component<
   constructor(props: SearchMoviePageProps) {
     super(props);
     this.state = {
-      movies: []
+      movies: [],
+      query: ""
     };
   }
 
@@ -62,20 +65,13 @@ export class SearchMoviePage extends Component<
 
   render() {
     return (
-      <div>
+      <div className="m-5">
+        <Header title="Search Movies" action="View All" />
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
-            <Navbar />
+            <MovieList movies={this.state.movies} />
           </Suspense>
         </ErrorBoundary>
-        <div className="m-5">
-          <Header title="Search Movies" action="View All" />
-          <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-              <MovieList movies={this.state.movies} />
-            </Suspense>
-          </ErrorBoundary>
-        </div>
       </div>
     );
   }

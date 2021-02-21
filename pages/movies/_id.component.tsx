@@ -1,11 +1,7 @@
 import React, { Component, lazy, Suspense } from "react";
 import { match } from "react-router-dom";
-import ErrorBoundary from "../../components/commons/error-boundary.component";
-import Loading from "../../components/commons/loading.component";
 import { PartialMovieModel } from "../../models/movie";
 import { getDetailMovie } from "../../services";
-
-const Navbar = lazy(() => import("../../components/commons/navbar.component"));
 
 export interface MovieDetailPageParams {
   id: string;
@@ -38,16 +34,7 @@ export class MovieDetailPage extends Component<
   }
 
   render() {
-    return (
-      <div>
-        <ErrorBoundary>
-          <Suspense fallback={<Loading />}>
-            <Navbar />
-          </Suspense>
-        </ErrorBoundary>
-        <div>{!!this.state.movie ? this.state.movie.title : ""}</div>
-      </div>
-    );
+    return <div>{!!this.state.movie ? this.state.movie.title : ""}</div>;
   }
 }
 

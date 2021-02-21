@@ -8,7 +8,6 @@ import { getUpcomingMovies } from "../../services";
 const MovieList = lazy(() =>
   import("../../components/movies/list-movie.component")
 );
-const Navbar = lazy(() => import("../../components/commons/navbar.component"));
 
 export interface UpcomingMoviePageProps {}
 export interface UpcomingMoviePageState {
@@ -38,20 +37,13 @@ export class UpcomingMoviePage extends Component<
 
   render() {
     return (
-      <div>
+      <div className="m-5">
+        <Header title="Upcoming Movies" action="View All" />
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
-            <Navbar />
+            <MovieList movies={this.state.movies} />
           </Suspense>
         </ErrorBoundary>
-        <div className="m-5">
-          <Header title="Upcoming Movies" action="View All" />
-          <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-              <MovieList movies={this.state.movies} />
-            </Suspense>
-          </ErrorBoundary>
-        </div>
       </div>
     );
   }

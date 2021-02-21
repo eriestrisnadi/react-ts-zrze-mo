@@ -8,7 +8,6 @@ import { getTopRatedMovies } from "../../services";
 const MovieList = lazy(() =>
   import("../../components/movies/list-movie.component")
 );
-const Navbar = lazy(() => import("../../components/commons/navbar.component"));
 
 export interface TopRatedMoviePageProps {}
 export interface TopRatedMoviePageState {
@@ -38,20 +37,13 @@ export class TopRatedMoviePage extends Component<
 
   render() {
     return (
-      <div>
+      <div className="m-5">
+        <Header title="Top Rated Movies" action="View All" />
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
-            <Navbar />
+            <MovieList movies={this.state.movies} />
           </Suspense>
         </ErrorBoundary>
-        <div className="m-5">
-          <Header title="Top Rated Movies" action="View All" />
-          <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-              <MovieList movies={this.state.movies} />
-            </Suspense>
-          </ErrorBoundary>
-        </div>
       </div>
     );
   }

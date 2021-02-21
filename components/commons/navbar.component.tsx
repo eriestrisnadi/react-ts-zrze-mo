@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { debounce } from "lodash";
 import { stringify } from "query-string";
+import Dropdown from "./dropdown.component";
 
 export interface NavbarProps {
   history: any;
@@ -18,10 +19,19 @@ class BaseNavbar extends Component<NavbarProps, NavbarState> {
   handleSearchInput(e: React.FormEvent<HTMLInputElement>) {
     const title = (e.target as HTMLInputElement).value;
 
-    this.props.history.push({
-      pathname: "/movies/search",
-      search: "?" + stringify({ title })
-    });
+    if (!!!title) {
+      this.props.history.push("/");
+      return;
+    }
+
+    this.props.history.push("/movies/search?" + stringify({ title }));
+  }
+
+  years(size: number = 5) {
+    const currentYear = new Date().getUTCFullYear();
+    return Array(currentYear - (currentYear - size))
+      .fill("")
+      .map((_v, idx) => currentYear - idx);
   }
 
   render() {
@@ -31,12 +41,17 @@ class BaseNavbar extends Component<NavbarProps, NavbarState> {
           Home
         </Link>
         <div className="flex flex-grow gap-2 justify-center">
-          <div className="flex justify-center flex-row items-center w-full md:w-64 border-2 rounded-md">
+          <div className="flex justify-center flex-row items-center w-full md:w-2/3 border-2 rounded-md">
             <input
               type="text"
               placeholder="Search"
-              className="outline-none py-1.5 p-2.5 rounded-xl w-full"
+              className="outline-none py-1.5 p-2.5 rounded-xl flex-grow"
               onInput={this.handleSearchInput}
+            />
+            <Dropdown
+              placeholder="Year"
+              onChange={e => console.log(e)}
+              items={this.years(10)}
             />
           </div>
         </div>

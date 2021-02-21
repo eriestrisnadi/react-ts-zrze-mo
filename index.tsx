@@ -2,6 +2,7 @@ import React, { Component, Suspense, lazy } from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Loading from "./components/commons/loading.component";
+import Navbar from "./components/commons/navbar.component";
 import "./style.css";
 
 const HomePage = lazy(() => import("./pages/home.component"));
@@ -21,6 +22,7 @@ class App extends Component<AppProps, AppState> {
   render() {
     return (
       <Router>
+        <Navbar />
         <Suspense fallback={<Loading />}>
           <Switch>
             <Route exact path="/" component={HomePage} />

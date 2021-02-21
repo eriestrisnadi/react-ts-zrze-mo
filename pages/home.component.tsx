@@ -13,7 +13,6 @@ import {
 const MovieList = lazy(() =>
   import("../components/movies/list-movie.component")
 );
-const Navbar = lazy(() => import("../components/commons/navbar.component"));
 
 export interface HomePageProps {}
 export interface HomePageState {
@@ -54,64 +53,57 @@ export class HomePage extends Component<HomePageProps, HomePageState> {
 
   render() {
     return (
-      <div>
+      <div className="m-5">
+        <Header
+          title="Top Rated Movies"
+          action={
+            <Link
+              className="text-xs text-gray-600 font-semibold"
+              to="/movies/top-rated"
+            >
+              View All
+            </Link>
+          }
+        />
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
-            <Navbar />
+            <MovieList movies={this.state.topRated} limit={6} />
           </Suspense>
         </ErrorBoundary>
-        <div className="m-5">
-          <Header
-            title="Top Rated Movies"
-            action={
-              <Link
-                className="text-xs text-gray-600 font-semibold"
-                to="/movies/top-rated"
-              >
-                View All
-              </Link>
-            }
-          />
-          <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-              <MovieList movies={this.state.topRated} limit={6} />
-            </Suspense>
-          </ErrorBoundary>
 
-          <Header
-            title="Popular Movies"
-            action={
-              <Link
-                className="text-xs text-gray-600 font-semibold"
-                to="/movies/top-popular"
-              >
-                View All
-              </Link>
-            }
-          />
-          <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-              <MovieList movies={this.state.popular} limit={6} />
-            </Suspense>
-          </ErrorBoundary>
+        <Header
+          title="Popular Movies"
+          action={
+            <Link
+              className="text-xs text-gray-600 font-semibold"
+              to="/movies/top-popular"
+            >
+              View All
+            </Link>
+          }
+        />
+        <ErrorBoundary>
+          <Suspense fallback={<Loading />}>
+            <MovieList movies={this.state.popular} limit={6} />
+          </Suspense>
+        </ErrorBoundary>
 
-          <Header
-            title="Upcoming Movies"
-            action={
-              <Link
-                className="text-xs text-gray-600 font-semibold"
-                to="/movies/top-upcoming"
-              >
-                View All
-              </Link>
-            }
-          />
-          <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-              <MovieList movies={this.state.upcoming} limit={6} />
-            </Suspense>
-          </ErrorBoundary>
-        </div>
+        <Header
+          title="Upcoming Movies"
+          action={
+            <Link
+              className="text-xs text-gray-600 font-semibold"
+              to="/movies/top-upcoming"
+            >
+              View All
+            </Link>
+          }
+        />
+        <ErrorBoundary>
+          <Suspense fallback={<Loading />}>
+            <MovieList movies={this.state.upcoming} limit={6} />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     );
   }

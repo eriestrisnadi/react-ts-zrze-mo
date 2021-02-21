@@ -41,6 +41,10 @@ export class SearchMoviePage extends Component<
   }
 
   componentDidMount() {
+    this.unlisten = this.props.history.listen(() => {
+      this.fetchMovies();
+    });
+
     this.fetchMovies();
   }
 
@@ -50,12 +54,6 @@ export class SearchMoviePage extends Component<
     searchMovies(query!.title as string)
       .then(({ results }) => results)
       .then(movies => this.setState({ movies }));
-  }
-
-  componentWillMount() {
-    this.unlisten = this.props.history.listen(() => {
-      this.fetchMovies();
-    });
   }
 
   componentWillUnmount() {

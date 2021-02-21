@@ -7,24 +7,50 @@ import Dropdown from "./dropdown.component";
 export interface NavbarProps {
   history: any;
 }
-export interface NavbarState {}
+export interface NavbarState {
+  year: string;
+  query: string;
+}
 
 class BaseNavbar extends Component<NavbarProps, NavbarState> {
   constructor(props: NavbarProps) {
     super(props);
 
+    this.state = { year: null, query: "" };
+
     this.handleSearchInput = debounce(this.handleSearchInput.bind(this), 1000);
+    this.handleChangeYear = this.handleChangeYear.bind(this);
   }
 
   handleSearchInput(e: React.FormEvent<HTMLInputElement>) {
-    const title = (e.target as HTMLInputElement).value;
+    const query = (e.target as HTMLInputElement).value;
+
+    this.setState({ query }, this.resetLocation);
+  }
+
+  handleChangeYear(year: string) {
+    this.setState({ year }, this.resetLocation);
+  }
+
+  resetLocation() {
+    const title = this.state.query;
+    const year = this.state.year;
+
+    const query = {
+      title,
+      year
+    };
 
     if (!!!title) {
       this.props.history.push("/");
       return;
     }
 
-    this.props.history.push("/movies/search?" + stringify({ title }));
+    if (!!!year) {
+      delete query.year;
+    }
+
+    this.props.history.push("/movies/search?" + stringify(query));
   }
 
   years(size: number = 5) {
@@ -50,7 +76,7 @@ class BaseNavbar extends Component<NavbarProps, NavbarState> {
             />
             <Dropdown
               placeholder="Year"
-              onChange={e => console.log(e)}
+              onChange={this.handleChangeYear}
               items={this.years(10)}
             />
           </div>

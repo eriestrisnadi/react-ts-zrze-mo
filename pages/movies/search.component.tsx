@@ -53,8 +53,11 @@ export class SearchMoviePage extends Component<
 
   fetchMovies() {
     const query = parse(this.props.location.search);
+    const params = { ...query };
 
-    searchMovies(query!.title as string)
+    delete params.title;
+
+    searchMovies(query!.title as string, params)
       .then(({ results }) => results)
       .then(movies => this.setState({ movies }));
   }

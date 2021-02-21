@@ -8,15 +8,20 @@ const Card = lazy(() => import("../commons/card.component"));
 
 export interface CardMovieProps {
   movie: PartialMovieModel;
+  className?: string;
 }
 export interface CardMovieState {}
 
 export class CardMovie extends Component<CardMovieProps, CardMovieState> {
+  static defaultProps = {
+    className: null
+  };
+
   render() {
     return (
       <ErrorBoundary type="card">
         <Suspense fallback={<Loading />}>
-          <Card>
+          <Card {...{ className: this.props.className }}>
             <img
               src={bucket + this.props.movie.poster_path}
               className="rounded-xl"

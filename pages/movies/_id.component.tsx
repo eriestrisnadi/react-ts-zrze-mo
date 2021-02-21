@@ -55,11 +55,14 @@ export class MovieDetailPage extends Component<
             backgroundPosition: "50% 35%"
           }}
         />
-        <div className="md:px-24 md:mx-24 mx-2.5 px-2.5 my-5 flex flex-row gap-5">
+        <div className="md:px-24 md:mx-24 mx-2.5 px-2.5 my-5 flex flex-col md:flex-row gap-5">
           <div>
             <CardMovie className="hidden md:block" movie={this.state.movie} />
             <div className="flex flex-row gap-2">
-              <div className="bg-blue-500 capitalize font-semibold mt-2 px-5 py-1.5 rounded-lg text-white flex-grow flex flex-row gap-2">
+              <div
+                className="bg-blue-500 capitalize font-semibold mt-2 px-5 py-1.5 rounded-lg text-white flex-grow flex flex-row gap-2"
+                role="button"
+              >
                 <svg
                   width="24"
                   height="24"
@@ -71,20 +74,23 @@ export class MovieDetailPage extends Component<
                     width="48"
                     height="48"
                     fill="white"
-                    fill-opacity="0.01"
+                    fillOpacity="0.01"
                   />
                   <path
                     d="M15 24V11.8756L25.5 17.9378L36 24L25.5 30.0622L15 36.1244V24Z"
                     fill="currentColor"
                     stroke="currentColor"
-                    stroke-width="4"
-                    stroke-linejoin="round"
+                    strokeWidth="4"
+                    strokeLinejoin="round"
                   />
                 </svg>
                 <div>Play</div>
               </div>
 
-              <div className="bg-red-500 capitalize font-semibold mt-2 px-5 py-1.5 rounded-lg text-white">
+              <div
+                className="bg-red-500 capitalize font-semibold mt-2 px-5 py-1.5 rounded-lg text-white"
+                role="button"
+              >
                 <svg
                   width="24"
                   height="24"

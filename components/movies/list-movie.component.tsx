@@ -20,13 +20,15 @@ export class ListMovie extends Component<ListMovieProps, ListMovieState> {
   };
 
   render() {
+    const movies = this.props.movies.filter(({ poster_path }) => !!poster_path);
+
     return (
       <ErrorBoundary>
         <Suspense fallback={<Loading />}>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-5">
             {take(
-              this.props.movies,
-              this.props.limit > 0 ? this.props.limit : this.props.movies.length
+              movies,
+              this.props.limit > 0 ? this.props.limit : movies.length
             ).map(movie => (
               <Link key={movie.id} to={`/movies/${movie.id}`}>
                 <CardMovie {...{ movie }} />

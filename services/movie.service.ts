@@ -12,5 +12,14 @@ export const getPopularMovies = (params?: any) =>
 export const getUpcomingMovies = (params?: any) =>
   apiService.get("upcoming", { headers, params }) as Promise<MoviePagination>;
 
+export const searchMovies = (query: string, params?: any) =>
+  apiService.get("movie", {
+    headers: { endpoint: "search" },
+    params: {
+      ...{ query },
+      ...params
+    }
+  }) as Promise<MoviePagination>;
+
 export const getDetailMovie = (id: string, params?: any) =>
   apiService.get(id, { headers, params }) as Promise<MovieModel>;

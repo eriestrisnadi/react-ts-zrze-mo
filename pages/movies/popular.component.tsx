@@ -8,6 +8,7 @@ import { getPopularMovies } from "../../services";
 const MovieList = lazy(() =>
   import("../../components/movies/list-movie.component")
 );
+const Navbar = lazy(() => import("../../components/commons/navbar.component"));
 
 export interface PopularMoviePageProps {}
 export interface PopularMoviePageState {
@@ -37,13 +38,20 @@ export class PopularMoviePage extends Component<
 
   render() {
     return (
-      <div className="m-5">
-        <Header title="Popular Movies" action="View All" />
+      <div>
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
-            <MovieList movies={this.state.movies} />
+            <Navbar />
           </Suspense>
         </ErrorBoundary>
+        <div className="m-5">
+          <Header title="Popular Movies" action="View All" />
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <MovieList movies={this.state.movies} />
+            </Suspense>
+          </ErrorBoundary>
+        </div>
       </div>
     );
   }

@@ -29,8 +29,6 @@ instance.interceptors.request.use((url, options) => {
   };
 });
 
-// instance.interceptors.response.use(response => response.data);
-
 export const apiService = instance;
 
 export default apiService;

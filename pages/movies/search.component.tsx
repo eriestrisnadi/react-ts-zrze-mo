@@ -3,27 +3,37 @@ import ErrorBoundary from "../../components/commons/error-boundary.component";
 import Header from "../../components/commons/header.component";
 import Loading from "../../components/commons/loading.component";
 import { PartialMovieModel } from "../../models/movie";
-import { getUpcomingMovies } from "../../services";
+import { searchMovies } from "../../services";
+import { parse } from "query-string";
+import { withRouter } from "react-router-dom";
 
 const MovieList = lazy(() =>
   import("../../components/movies/list-movie.component")
 );
 const Navbar = lazy(() => import("../../components/commons/navbar.component"));
 
-export interface UpcomingMoviePageProps {}
-export interface UpcomingMoviePageState {
+export interface SearchMoviePageQuery {
+  id: string;
+}
+export interface SearchMoviePageProps {
+  location?: Location;
+  history?: any;
+}
+export interface SearchMoviePageState {
   movies: PartialMovieModel[];
 }
 
-export class UpcomingMoviePage extends Component<
-  UpcomingMoviePageProps,
-  UpcomingMoviePageState
+export class SearchMoviePage extends Component<
+  SearchMoviePageProps,
+  SearchMoviePageState
 > {
   state = {
     movies: []
   };
 
-  constructor(props: UpcomingMoviePageProps) {
+  unlisten: Function;
+
+  constructor(props: SearchMoviePageProps) {
     super(props);
     this.state = {
       movies: []
@@ -31,9 +41,25 @@ export class UpcomingMoviePage extends Component<
   }
 
   componentDidMount() {
-    getUpcomingMovies()
+    this.fetchMovies();
+  }
+
+  fetchMovies() {
+    const query = parse(this.props.location.search);
+
+    searchMovies(query!.title as string)
       .then(({ results }) => results)
       .then(movies => this.setState({ movies }));
+  }
+
+  componentWillMount() {
+    this.unlisten = this.props.history.listen(() => {
+      this.fetchMovies();
+    });
+  }
+
+  componentWillUnmount() {
+    this.unlisten();
   }
 
   render() {
@@ -45,7 +71,7 @@ export class UpcomingMoviePage extends Component<
           </Suspense>
         </ErrorBoundary>
         <div className="m-5">
-          <Header title="Upcoming Movies" action="View All" />
+          <Header title="Search Movies" action="View All" />
           <ErrorBoundary>
             <Suspense fallback={<Loading />}>
               <MovieList movies={this.state.movies} />
@@ -57,4 +83,4 @@ export class UpcomingMoviePage extends Component<
   }
 }
 
-export default UpcomingMoviePage;
+export default withRouter(SearchMoviePage);

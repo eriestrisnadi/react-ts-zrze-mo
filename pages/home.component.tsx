@@ -56,21 +56,21 @@ export class HomePage extends Component<HomePageProps, HomePageState> {
         <Header title="Top Rated Movies" action="View All" />
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
-            <MovieList movies={this.state.topRated} limit={5} />
+            <MovieList movies={this.state.topRated} limit={6} />
           </Suspense>
         </ErrorBoundary>
 
         <Header title="Popular Movies" action="View All" />
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
-            <MovieList movies={this.state.popular} limit={5} />
+            <MovieList movies={this.state.popular} limit={6} />
           </Suspense>
         </ErrorBoundary>
 
         <Header title="Upcoming Movies" action="View All" />
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
-            <MovieList movies={this.state.upcoming} limit={5} />
+            <MovieList movies={this.state.upcoming} limit={6} />
           </Suspense>
         </ErrorBoundary>
       </div>

@@ -11,14 +11,7 @@ export class Header extends Component<HeaderProps, HeaderState> {
     return (
       <div className="flex flex-row my-5 items-end">
         <h1 className="flex-grow text-2xl">{this.props.title}</h1>
-        {this.props.action && typeof this.props.action === "string" && (
-          <span className="text-xs text-gray-600 font-semibold">
-            {this.props.action}
-          </span>
-        )}
-        {this.props.action &&
-          typeof this.props.action !== "string" &&
-          this.props.action}
+        {this.props.action}
       </div>
     );
   }

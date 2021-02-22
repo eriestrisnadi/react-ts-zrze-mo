@@ -38,7 +38,7 @@ export class UpcomingMoviePage extends Component<
   render() {
     return (
       <div className="m-5">
-        <Header title="Upcoming Movies" action="View All" />
+        <Header title="Upcoming Movies" />
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
             <MovieList movies={this.state.movies} />

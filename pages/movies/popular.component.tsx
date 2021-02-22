@@ -38,7 +38,7 @@ export class PopularMoviePage extends Component<
   render() {
     return (
       <div className="m-5">
-        <Header title="Popular Movies" action="View All" />
+        <Header title="Popular Movies" />
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
             <MovieList movies={this.state.movies} />

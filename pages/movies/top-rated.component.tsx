@@ -38,7 +38,7 @@ export class TopRatedMoviePage extends Component<
   render() {
     return (
       <div className="m-5">
-        <Header title="Top Rated Movies" action="View All" />
+        <Header title="Top Rated Movies" />
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
             <MovieList movies={this.state.movies} />

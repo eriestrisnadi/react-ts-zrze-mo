@@ -69,7 +69,7 @@ export class SearchMoviePage extends Component<
   render() {
     return (
       <div className="m-5">
-        <Header title="Search Movies" action="View All" />
+        <Header title="Search Movies" />
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
             <MovieList movies={this.state.movies} />

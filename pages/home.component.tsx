@@ -1,17 +1,17 @@
-import React, { Component, lazy, Suspense } from "react";
-import { Link } from "react-router-dom";
-import ErrorBoundary from "../components/commons/error-boundary.component";
-import Loading from "../components/commons/loading.component";
-import Header from "../components/commons/header.component";
-import { PartialMovieModel } from "../models/movie";
+import React, { Component, lazy, Suspense } from 'react';
+import { Link } from 'react-router-dom';
+import ErrorBoundary from '../components/commons/error-boundary.component';
+import Loading from '../components/commons/loading.component';
+import Header from '../components/commons/header.component';
+import { PartialMovieModel } from '../models/movie';
 import {
   getPopularMovies,
   getTopRatedMovies,
   getUpcomingMovies
-} from "../services";
+} from '../services';
 
 const MovieList = lazy(() =>
-  import("../components/movies/list-movie.component")
+  import('../components/movies/list-movie.component')
 );
 
 export interface HomePageProps {}
@@ -27,15 +27,6 @@ export class HomePage extends Component<HomePageProps, HomePageState> {
     popular: [],
     upcoming: []
   };
-
-  constructor(props: HomePageProps) {
-    super(props);
-    this.state = {
-      topRated: [],
-      popular: [],
-      upcoming: []
-    };
-  }
 
   componentDidMount() {
     getTopRatedMovies()

@@ -1,9 +1,9 @@
-import React, { Component, lazy, Suspense } from "react";
-import { match } from "react-router-dom";
-import CardMovie from "../../components/movies/card-movie.component";
-import { bucket } from "../../constants/bucket.config";
-import { PartialMovieModel } from "../../models/movie";
-import { getDetailMovie } from "../../services";
+import React, { Component, lazy, Suspense } from 'react';
+import { match } from 'react-router-dom';
+import CardMovie from '../../components/movies/card-movie.component';
+import { bucket } from '../../constants/bucket.config';
+import { PartialMovieModel } from '../../models/movie';
+import { getDetailMovie } from '../../services';
 
 export interface MovieDetailPageParams {
   id: string;
@@ -24,12 +24,6 @@ export class MovieDetailPage extends Component<
     movie: {},
     loading: true
   };
-
-  constructor(props: MovieDetailPageProps) {
-    super(props);
-
-    this.state = { movie: {}, loading: true };
-  }
 
   componentDidMount() {
     const { id } = this.props.match.params;
@@ -52,7 +46,7 @@ export class MovieDetailPage extends Component<
           className="bg-cover bg-no-repeat h-64"
           style={{
             backgroundImage: `url(${bucket + this.state.movie.backdrop_path})`,
-            backgroundPosition: "50% 35%"
+            backgroundPosition: '50% 35%'
           }}
         />
         <div className="md:px-24 md:mx-24 mx-2.5 px-2.5 my-5 flex flex-col md:flex-row gap-5">

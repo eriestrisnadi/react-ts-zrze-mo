@@ -1,9 +1,9 @@
-import React, { Component, lazy, Suspense } from "react";
-import Loading from "./loading.component";
+import React, { Component, lazy, Suspense } from 'react';
+import Loading from './loading.component';
 
-const Card = lazy(() => import("./card.component"));
+const Card = lazy(() => import('./card.component'));
 
-export type ErrorBoundaryType = "page" | "card" | "default";
+export type ErrorBoundaryType = 'page' | 'card' | 'default';
 export interface ErrorBoundaryProps {
   type?: ErrorBoundaryType;
 }
@@ -14,18 +14,13 @@ export class ErrorBoundary extends Component<
   ErrorBoundaryState
 > {
   static defaultProps: ErrorBoundaryProps = {
-    type: "default"
+    type: 'default'
   };
 
   state = {
     error: null,
     errorInfo: null
   };
-
-  constructor(props: ErrorBoundaryProps) {
-    super(props);
-    this.state = { error: null, errorInfo: null };
-  }
 
   componentDidCatch(error: Error, errorInfo: { componentStack: string }) {
     this.setState({

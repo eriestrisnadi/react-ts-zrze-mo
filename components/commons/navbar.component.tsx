@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { debounce } from "lodash";
-import { stringify } from "query-string";
-import Dropdown from "./dropdown.component";
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import debounce from 'lodash.debounce';
+import { stringify } from 'query-string';
+import Dropdown from './dropdown.component';
 
 export interface NavbarProps {
   history: any;
@@ -16,7 +16,7 @@ class BaseNavbar extends Component<NavbarProps, NavbarState> {
   constructor(props: NavbarProps) {
     super(props);
 
-    this.state = { year: null, query: "" };
+    this.state = { year: null, query: '' };
 
     this.handleSearchInput = debounce(this.handleSearchInput.bind(this), 1000);
     this.handleChangeYear = this.handleChangeYear.bind(this);
@@ -42,7 +42,7 @@ class BaseNavbar extends Component<NavbarProps, NavbarState> {
     };
 
     if (!!!title) {
-      this.props.history.push("/");
+      this.props.history.push('/');
       return;
     }
 
@@ -50,13 +50,13 @@ class BaseNavbar extends Component<NavbarProps, NavbarState> {
       delete query.year;
     }
 
-    this.props.history.push("/movies/search?" + stringify(query));
+    this.props.history.push('/movies/search?' + stringify(query));
   }
 
   years(size: number = 5) {
     const currentYear = new Date().getUTCFullYear();
     return Array(currentYear - (currentYear - size))
-      .fill("")
+      .fill('')
       .map((_v, idx) => currentYear - idx);
   }
 
